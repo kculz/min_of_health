@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+  body{
+    @apply font-signika
+  }
+  .form-design{
+    @apply  border-2 rounded-md border-indigo-500 mb-5 outline-none focus:border-indigo-800
+  }
+  .form-container{
+    @apply w-[100%]
+  }
+  .form-container input{
+   width:400px;
+   @apply p-2
+  }
+  .btn{
+    @apply px-5 py-2 rounded-lg border border-indigo-500
+  }
+  .btn-light{
+    @apply bg-white text-indigo-500 hover:border-indigo-900 
+  }
+  .btn-info{
+    @apply bg-indigo-500 text-white font-bold hover:bg-indigo-800
+  }
+  .container{
+    @apply px-8 mx-5
+  }
+  input,select{
+    @apply p-2 w-[300px]
+  }
+  .card{
+    @apply cursor-pointer hover:bg-slate-200 rounded-xl p-5 w-52 h-36
+  }
+}
