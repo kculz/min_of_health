@@ -29,7 +29,7 @@ app.post('/login',(req,res)=>{
 })
 
 //Get all assets
-app.get('/assets',(req,res)=>{
+app.post('/assets',(req,res)=>{
     let sql_cmd = "SELECT * FROM assets"
     db.query(sql_cmd,(error,result)=>{
         if(error){
@@ -69,7 +69,28 @@ app.post('/assets/add',(req,res)=>{
     })
 })
 
+//Delete asset by id
 
+app.delete('/assets/delete/:id',(req,res)=>{
+
+    let sql_cmd = `DELETE FROM assets WHERE id='${req.params.id}'`
+    db.query(sql_cmd,(error,result)=>{
+        if(error){
+            res.send(error)
+        }
+        if(result){
+            res.send(result)
+            console.log('deleted')
+        }
+    })
+})
+
+//Edit asset by id
+
+app.patch('/assets/edit/:id',(req,res)=>{
+    const {id} = req.params
+    let sql_cmd = "UPDATE * WHERE id=? "
+})
 
 
 

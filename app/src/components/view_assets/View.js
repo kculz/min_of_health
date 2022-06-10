@@ -1,21 +1,25 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const View = () => {
-  const [getdata,setGetData] = useState([])
-
-
-  const loadData = async() =>{
-    const responce = await axios.get('http://localhost:5000/assets')
-      setGetData(responce.getdata)
-      console.log(responce.getdata)
-      console.log("Hello")
+  const [data, setData] = useState([])
+  const loadData = async () => {
+    const responce = await axios.post('http://localhost:5000/assets')
+      setData(responce.data)
+      console.log(responce.data)
   }
-  
+  const handleDelete = (id) =>{
+    if(window.confirm("Are you sure you want to delete?")){
+      axios.delete(`http://localhost:5000/assets/delete/${id}`)
+      setTimeout(()=>{
+        loadData()
+      },500)
+    }
+  }
+
   useEffect(()=>{
     loadData()
   },[])
-
   return (
     <div className='container'>
       <table cellPadding={10}>
@@ -29,8 +33,8 @@ const View = () => {
               <th>Date Received</th>
               <th>Date Issued</th>
               <th>Condition</th>
+              <th>Status</th>
               <th>Last Serviced</th>
-              <th>Comment</th>
               <th>Request</th>
               <th colSpan={2}>Action</th>
               </tr>
@@ -38,31 +42,37 @@ const View = () => {
           <tbody className='bg-slate-300'>
             
             {
-             getdata && getdata.map((asset,index)=>{
+              data && data.map((item,index)=>{
                 return(
-                  <tr className='hover:bg-slate-200' key={index}>
-                  <td>{asset.id}</td>
-                  <td>{asset.asset_desc}</td>
-                  <td>{asset.asset_sn}</td>
-                  <td>{asset.asset_gf}</td>
-                  <td>{asset.custodian_name}</td>
-                  <td>{asset.department}</td>
-                  <td>{asset.asset_condition}</td>
-                  <td>{asset.date_of_last_service}</td>
-                  {/* <td>{asset.comment}</td> */}
-                  <td>{asset.request}</td>
+                  <>
+                    <tr className='hover:bg-slate-200' key={index}>
+                  <td>{item.id}</td>
+                  <td>{item.custodian_name}</td>
+                  <td>{item.asset_desc}</td>
+                  <td>{item.asset_sn}</td>
+                  <td>{item.asset_gf}</td>
+                  <td>{item.date_issued}</td>
+                  <td>{item.date_issued}</td>
+                  <td>{item.asset_condition}</td>
+                  <td>{item.asset_status}</td>
+                  <td>{item.date_of_last_service}</td>
+                  <td>{item.requests}</td>
                   <td>
                       <button className='btn btn-info'>Edit</button>
                   </td>
                   <td>
-                      <button className='btn btn-danger'>Delete</button>
+                      <button className='btn btn-danger'
+                        onClick={()=> handleDelete(item.id)}
+                      >Delete</button>
                   </td>
               </tr> 
+                  </>
                 )
-               
               })
-          
             }
+             
+                  
+               
           </tbody>
       </table>
     </div>
