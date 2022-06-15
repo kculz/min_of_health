@@ -19,7 +19,7 @@ app.post('/login',(req,res)=>{
         if(error){
             res.send(error)
         }
-        if(result.length > 0){
+        if(result){
             res.send(result)
         }else{
             res.send(`Invalid Username | Password`)
@@ -57,9 +57,33 @@ app.post('/assest/:department',(req,res)=>{
 
 // Add new asset
 app.post('/assets/add',(req,res)=>{
-    const {asset_desc,asset_sn,asset_gf,custodian_name,department,asset_condition,asset_status,date_issued,date_of_last_service,purchase_value,requests,requests_status} = req.body
-    let sql_cmd = "INSERT INTO assets (asset_desc,asset_sn,asset_gf,custodian_name,department,asset_condition,asset_status,date_issued,date_of_last_service,purchase_value,requests,requests_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
-    db.query(sql_cmd,[asset_desc,asset_sn,asset_gf,custodian_name,department,asset_condition,asset_status,date_issued,date_of_last_service,purchase_value,requests,requests_status],(error,result)=>{
+    const assetDesc = req.body.assetDesc
+    const assetSn = req.body.assetSn
+    const assetGf = req.body.assetGf
+    const custodianName = req.body.custodianName
+    const department = req.body.department
+    const assetCondition = req.body.assetCondition
+    const assetStatus = req.body.assetStatus
+    const dateIssued = req.body.dateIssued
+    const dateOfLastService = req.body.dateOfLastService
+    const purchaseValue = req.body.purchaseValue
+    const request = req.body.request
+    const requestStatus = req.body.requestStatus
+
+    let sql_cmd = "INSERT INTO assets (assetDesc,assetSn,assetGf,custodianName,department,assetCondition,assetStatus,dateIssued,dateOfLastService,purchaseValue,request,requestStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+    db.query(sql_cmd,[
+        assetDesc,
+        assetSn,
+        assetGf,
+        custodianName,
+        department,
+        assetCondition,
+        assetStatus,
+        dateIssued,
+        dateOfLastService,
+        purchaseValue,
+        request,
+        requestStatus],(error,result)=>{
         if(error){
             res.send(error)
         }
