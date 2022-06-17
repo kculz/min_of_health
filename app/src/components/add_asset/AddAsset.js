@@ -32,8 +32,8 @@ const AddAsset = () => {
         purchaseValue:purchaseValue,
         request:request,
         requestStatus:requestStatus      
-      }).then((responce)=>{
-        console.log(responce.data)
+      }).then((Response)=>{
+        navigate('/dashboard')
       }).catch(()=>{
 
       })
@@ -63,8 +63,20 @@ const AddAsset = () => {
             >
                 <option value="None" selected>Select Department</option>
                 <option value="Admin">Admin</option>
-                <option value="Registry">Registry</option>
-                <option value="I.T">I.T</option>
+                <option value="Registry">Accounts</option>
+                <option value="HR">Human Resources</option>
+                <option value="Procurement">Procurement</option>
+                <option value="Nursing">Nursing</option>
+                <option value="Transport">Transport</option>
+                <option value="PMD Secretary">PMD Secretary</option>
+                <option value="Reports and Info">Reports & Info</option>
+                <option value="Environmental Health">Environmental Health</option>
+                <option value="RNCH/VMC">RNCH/VMC</option>
+                <option value="Nutruition">Nutruition</option>
+                <option value="Store Room">Store Room</option>
+                <option value="Lab Office">Lab Office</option>
+
+
             </select>
            <select name="asset_status" className='form-design mx-3' 
            onChange={(e)=>{
@@ -74,6 +86,9 @@ const AddAsset = () => {
                <option value="None" selected>Select Status</option>
                <option value="Working">Working</option>
                <option value="Not Working">Not Working</option>
+               <option value="Good">Good</option>
+               <option value="Not Working">Dead</option>
+               <option value="Not Working">10 years & Greater</option>
            </select>
        </div>
         <div>
@@ -86,21 +101,11 @@ const AddAsset = () => {
             onChange={(e)=>{
               setAssetCondition(e.target.value)
             }}
+            disabled
             />
         </div>
 
-       <div>
-            <input type="date" name="date_issued"  className='form-design mx-3 '
-            onChange={(e)=>{
-              setDateIssued(e.target.value)
-            }}
-            />
-            <input type="date" name="date_of_last_service" className='form-design mx-3 '
-            onChange={(e)=>{
-              setDateOfLastService(e.target.value)
-            }}
-            />
-       </div>
+      
        <div>
             <input type="text" name="request_status" placeholder='Request Status' className='form-design mx-3' 
             onChange={(e)=>{
@@ -122,6 +127,18 @@ const AddAsset = () => {
             <input type="text" name="asset_gf" placeholder='Asset GF #' className='form-design mx-3' 
             onChange={(e)=>{
               setAssetGF(e.target.value)
+            }}
+            />
+       </div>
+       <div>
+            <input type="date" name="date_issued"  className='form-design mx-3 '
+            onChange={(e)=>{
+              setDateIssued(e.target.value)
+            }}
+            />
+            <input type="date" name="date_of_last_service" className='form-design mx-3 '
+            onChange={(e)=>{
+              setDateOfLastService(e.target.value)
             }}
             />
        </div>

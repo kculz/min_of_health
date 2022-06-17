@@ -70,20 +70,10 @@ app.post('/assets/add',(req,res)=>{
     const request = req.body.request
     const requestStatus = req.body.requestStatus
 
-    let sql_cmd = "INSERT INTO assets (assetDesc,assetSn,assetGf,custodianName,department,assetCondition,assetStatus,dateIssued,dateOfLastService,purchaseValue,request,requestStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
-    db.query(sql_cmd,[
-        assetDesc,
-        assetSn,
-        assetGf,
-        custodianName,
-        department,
-        assetCondition,
-        assetStatus,
-        dateIssued,
-        dateOfLastService,
-        purchaseValue,
-        request,
-        requestStatus],(error,result)=>{
+   
+
+  
+    db.query("INSERT INTO assets (asset_desc,asset_sn,asset_gf,custodian_name,department,asset_condition,asset_status,date_issued,date_of_last_service,purchase_value,requests,requests_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[assetDesc,assetSn,assetGf,custodianName,department,assetCondition,assetStatus,dateIssued,dateOfLastService,purchaseValue,request,requestStatus],(error,result)=>{
         if(error){
             res.send(error)
         }
@@ -113,7 +103,7 @@ app.delete('/assets/delete/:id',(req,res)=>{
 
 app.patch('/assets/edit/:id',(req,res)=>{
     const {id} = req.params
-    let sql_cmd = "UPDATE * WHERE id=? "
+    let sql_cmd = "UPDATE asset SET WHERE id=? "
 })
 
 
