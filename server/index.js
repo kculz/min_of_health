@@ -101,13 +101,30 @@ app.delete('/assets/delete/:id',(req,res)=>{
 
 //Edit asset by id
 
-app.patch('/assets/edit/:id',(req,res)=>{
+app.patch('/assets/edit',(req,res)=>{
     const {id} = req.params
-    let sql_cmd = "UPDATE asset SET WHERE id=? "
+    const assetDesc = req.body.assetDesc
+    const assetSn = req.body.assetSn
+    const assetGf = req.body.assetGf
+    const custodianName = req.body.custodianName
+    const department = req.body.department
+    const assetCondition = req.body.assetCondition
+    const assetStatus = req.body.assetStatus
+    const dateIssued = req.body.dateIssued
+    const dateOfLastService = req.body.dateOfLastService
+    const purchaseValue = req.body.purchaseValue
+    const request = req.body.request
+    const requestStatus = req.body.requestStatus
+    let sql_cmd = "UPDATE assets SET asset_desc=?,asset_sn=?, asset_gf=?,custodian_name=?,department=?,asset_condtion=?,asset_status=?,date_issued=?,date_of_last_service=?,purchase_value=?,requests=?,requests_status=? WHERE id=? "
+    db.query(sql_cmd,[assetDesc,assetSn,assetGf,custodianName,department,assetCondition,assetStatus,dateIssued,dateOfLastService,purchaseValue,request,requestStatus,id],(error,result)=>{
+        if(error){
+            res.send(error)
+        }
+        if(result){
+            res.send(result)
+        }
+    })
 })
-
-
-
 
 app.listen(process.env.PORT || 5000,()=>{
     console.log(`Port runing`)

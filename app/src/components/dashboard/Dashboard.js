@@ -1,6 +1,5 @@
 import React from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
 import {MdManageAccounts, MdAdminPanelSettings, MdHealthAndSafety} from 'react-icons/md'
 import {BiHealth} from 'react-icons/bi'
 
@@ -34,7 +33,7 @@ const redirectAddAssets = ()=>{
         <div>
             <h1 className="text-3xl text-indigo-500 text-center font-bold md:mt-11 mb-4">Departments</h1>
             <div className="container">
-                <div className='grid grid-row md:grid-cols-4 place-items-center'>
+                <div className='grid grid-row md:grid-cols-4 place-items-center items-center'>
                    <div className="card " onClick={redirect}>
                         <MdAdminPanelSettings size={50} color="#6366f1"/>
                         <h1 className="text-xl">Adminstration</h1>
@@ -58,7 +57,7 @@ const redirectAddAssets = ()=>{
               
             </div>
         </div>
-        iframe
+        
     </div>
   )
 }
