@@ -1,25 +1,44 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
+const initialState = {
+  assetDesc:'',
+  assetSn: '',
+  assetGf:'',
+  custodianName:'',
+  department:'',
+  assetCondition:'',
+  assetStatus:'',
+  dateIssued:'',
+  dateOfLastService:'',
+  purchaseValue:'',
+  request:'',
+  requestStatus:''
 
-const AddAsset = () => {
-  const [assetDesc,setAssetDesc] = useState("")
-  const [assetSn, setAssetSn] = useState("")
-  const [assetGf, setAssetGF] = useState("")
-  const [custodianName, setCustodianName] = useState("")
-  const [department, setDepartment] = useState("")
-  const [assetCondition, setAssetCondition] = useState("")
-  const [assetStatus, setAssetStatus] = useState("")
-  const [dateIssued, setDateIssued] = useState("")
-  const [dateOfLastService, setDateOfLastService] = useState("")
-  const [purchaseValue, setPurchaseValue] = useState(0)
-  const [request, setRequest] = useState("")
-  const [requestStatus, setRequestStatus] = useState("")
+}
 
+const UpdateAsset = () => {
+  const [state,setState] = useState(initialState)
+  const {assetCondition,assetDesc,assetGf,assetSn,assetStatus,custodianName,department,purchaseValue,request,requestStatus,dateIssued,dateOfLastService} = state
+
+  const handleInputChange = (e) =>{
+    const {name,value} = e.target
+    setState({...state,[name]:value})
+  }
+
+   
+  const {id} = useParams()
+  useEffect(()=>{
+    axios.post(`http://localhost:5000/assets/${id}`)
+    .then((responce)=>{
+      setState({...responce.data[0]})
+      navigate('/assets')
+    })
+  },[id])
   const navigate = useNavigate()
   const handleSubmit = ()=> {
-      axios.post('http://localhost:5000/assets/add',{
+      axios.put('http://localhost:5000/assets/edit',{
         assetDesc:assetDesc,
         assetSn:assetSn,
         assetGf:assetGf,
@@ -37,29 +56,25 @@ const AddAsset = () => {
       }).catch(()=>{
 
       })
-      
-
+     
   }
   return (
     <div className='grid place-items-center'>
       <div className="flex flex-col mt-32" >
        <div className=''>
             <input type="text" name="asset_desc" placeholder='Asset Description' className='form-design mx-3' 
-            onChange={(e)=>{
-              setAssetDesc(e.target.value)
-            }}
+            value={assetDesc}
+            onChange={handleInputChange}
             />
             <input type="text" name="asset_sn" placeholder='Asset SN #' className='form-design mx-3' 
-            onChange={(e)=>{
-              setAssetSn(e.target.value)
-            }}
+           value={assetSn}
+           onChange={handleInputChange}
             />
        </div>
        <div>
             <select name="department" className='form-design mx-3' 
-            onChange={(e)=>{
-              setDepartment(e.target.value)
-            }}
+            value={department}
+            onChange={handleInputChange}
             >
                 <option value="None" selected>Select Department</option>
                 <option value="Admin">Admin</option>
@@ -79,9 +94,8 @@ const AddAsset = () => {
 
             </select>
            <select name="asset_status" className='form-design mx-3' 
-           onChange={(e)=>{
-            setAssetStatus(e.target.value)
-           }}
+           value={assetStatus}
+           onChange={handleInputChange}
            >
                <option value="None" selected>Select Status</option>
                <option value="Working">Working</option>
@@ -93,53 +107,45 @@ const AddAsset = () => {
        </div>
         <div>
             <input type="text" name="custodian_name" placeholder='Custodian Name' className='form-design mx-3' 
-            onChange={(e)=>{
-              setCustodianName(e.target.value)
-            }}
+            value={custodianName}
+            onChange={handleInputChange}
             />
             <input type="text" name="asset_condition" placeholder='Asset Condition E.g Good' className='form-design mx-3' 
-            onChange={(e)=>{
-              setAssetCondition(e.target.value)
-            }}
+           value={assetCondition}
+           onChange={handleInputChange}
             disabled
             />
         </div>
 
       
-       <div>
+       {/* <div>
             <input type="text" name="request_status" placeholder='Request Status' className='form-design mx-3' 
-            onChange={(e)=>{
-              setRequestStatus(e.target.value)
-            }}
+            value={assetDesc}
+            onChange={handleInputChange}
             />
-            <input type="text" name="request" placeholder='Request Details' className='form-design mx-3' 
-            onChange={(e)=>{
-              setRequest(e.target.value)
-            }}
+            <input type="text" name="request" placeholder='Request ' className='form-design mx-3' 
+           value={request}
+           onChange={handleInputChange}
             />
-        </div>
+        </div> */}
        <div>
             <input type="number" name="purchase_value" placeholder='Purchase Value $00.00' className='form-design mx-3' 
-            onChange={(e)=>{
-              setPurchaseValue(e.target.value)
-            }}
+            value={purchaseValue}
+            onChange={handleInputChange}
             />
             <input type="text" name="asset_gf" placeholder='Asset GF #' className='form-design mx-3' 
-            onChange={(e)=>{
-              setAssetGF(e.target.value)
-            }}
+           value={assetGf}
+           onChange={handleInputChange}
             />
        </div>
        <div>
             <input type="date" name="date_issued"  className='form-design mx-3 '
-            onChange={(e)=>{
-              setDateIssued(e.target.value)
-            }}
+            value={dateIssued}
+            onChange={handleInputChange}
             />
             <input type="date" name="date_of_last_service" className='form-design mx-3 '
-            onChange={(e)=>{
-              setDateOfLastService(e.target.value)
-            }}
+            value={dateOfLastService}
+            onChange={handleInputChange}
             />
        </div>
        <button type="submit" className='btn btn-info' onClick={()=>handleSubmit()}>
@@ -151,4 +157,4 @@ const AddAsset = () => {
   )
 }
 
-export default AddAsset
+export default UpdateAsset

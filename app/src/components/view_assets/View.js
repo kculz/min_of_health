@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 
 const View = () => {
   const [data, setData] = useState([])
@@ -58,7 +60,7 @@ const View = () => {
                   <td>{item.date_of_last_service}</td>
                   <td>{item.requests}</td>
                   <td>
-                      <button className='btn btn-info'>Edit</button>
+                      <Link to={`/assets/edit/${item.id}`}className='btn btn-info'>Edit</Link>
                   </td>
                   <td>
                       <button className='btn btn-danger'

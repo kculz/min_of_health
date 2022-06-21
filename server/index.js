@@ -41,11 +41,11 @@ app.post('/assets',(req,res)=>{
     })
 })
 
-//Get assets by Department
-app.post('/assest/:department',(req,res)=>{
-    const {department} = req.params
-    let sql_cmd = "SELECT * FROM assets WHERE department=?"
-    db.query(sql_cmd,[department],(error,result)=>{
+//Get assets by id
+app.post('/assest/:id',(req,res)=>{
+    const {id} = req.params
+    let sql_cmd = "SELECT * FROM assets WHERE id=?"
+    db.query(sql_cmd,[id],(error,result)=>{
         if(error){
             res.send(error)
         }

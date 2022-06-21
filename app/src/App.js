@@ -5,6 +5,7 @@ import RequestsLogin from "./components/requests/RequestLogin";
 import Requests from "./components/requests/Requests";
 import View from "./components/view_assets/View";
 import AddAsset from "./components/add_asset/AddAsset";
+import UpdateAsset from "./components/add_asset/UpdateAsset";
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/requests/login" element={<RequestsLogin />} />
         <Route path="/requests" element={<Requests />} />
         <Route path="/add/asset" element={<AddAsset />} />
+        <Route path="/assets/edit/:id" element={<UpdateAsset />} />
         <Route  path="/" element={<Login />} />
       </Routes>
      

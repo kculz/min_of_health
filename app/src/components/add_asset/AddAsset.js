@@ -106,7 +106,7 @@ const AddAsset = () => {
         </div>
 
       
-       <div>
+       {/* <div>
             <input type="text" name="request_status" placeholder='Request Status' className='form-design mx-3' 
             onChange={(e)=>{
               setRequestStatus(e.target.value)
@@ -117,7 +117,7 @@ const AddAsset = () => {
               setRequest(e.target.value)
             }}
             />
-        </div>
+        </div> */}
        <div>
             <input type="number" name="purchase_value" placeholder='Purchase Value $00.00' className='form-design mx-3' 
             onChange={(e)=>{
