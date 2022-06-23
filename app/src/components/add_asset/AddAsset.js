@@ -30,8 +30,8 @@ const AddAsset = () => {
         dateIssued:dateIssued,
         dateOfLastService:dateOfLastService,
         purchaseValue:purchaseValue,
-        request:request,
-        requestStatus:requestStatus      
+        // request:request,
+        // requestStatus:requestStatus      
       }).then((Response)=>{
         navigate('/dashboard')
       }).catch(()=>{

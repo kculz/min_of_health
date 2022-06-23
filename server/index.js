@@ -42,7 +42,7 @@ app.post('/assets',(req,res)=>{
 })
 
 //Get assets by id
-app.post('/assest/:id',(req,res)=>{
+app.post('/assets/:id',(req,res)=>{
     const {id} = req.params
     let sql_cmd = "SELECT * FROM assets WHERE id=?"
     db.query(sql_cmd,[id],(error,result)=>{
@@ -101,7 +101,7 @@ app.delete('/assets/delete/:id',(req,res)=>{
 
 //Edit asset by id
 
-app.patch('/assets/edit',(req,res)=>{
+app.put('/assets/edit',(req,res)=>{
     const {id} = req.params
     const assetDesc = req.body.assetDesc
     const assetSn = req.body.assetSn

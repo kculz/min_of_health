@@ -23,8 +23,7 @@ const UpdateAsset = () => {
   const {assetCondition,assetDesc,assetGf,assetSn,assetStatus,custodianName,department,purchaseValue,request,requestStatus,dateIssued,dateOfLastService} = state
 
   const handleInputChange = (e) =>{
-    const {name,value} = e.target
-    setState({...state,[name]:value})
+    setState({...state,[e.target.name]:[e.target.value]})
   }
 
    
@@ -38,7 +37,7 @@ const UpdateAsset = () => {
   },[id])
   const navigate = useNavigate()
   const handleSubmit = ()=> {
-      axios.put('http://localhost:5000/assets/edit',{
+      axios.patch(`http://localhost:5000/assets/edit`,{
         assetDesc:assetDesc,
         assetSn:assetSn,
         assetGf:assetGf,
@@ -63,11 +62,11 @@ const UpdateAsset = () => {
       <div className="flex flex-col mt-32" >
        <div className=''>
             <input type="text" name="asset_desc" placeholder='Asset Description' className='form-design mx-3' 
-            value={assetDesc}
+            value={state.asset_desc}
             onChange={handleInputChange}
             />
             <input type="text" name="asset_sn" placeholder='Asset SN #' className='form-design mx-3' 
-           value={assetSn}
+           value={state.assetSn}
            onChange={handleInputChange}
             />
        </div>
