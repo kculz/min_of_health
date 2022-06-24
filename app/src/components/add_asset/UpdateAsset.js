@@ -62,7 +62,7 @@ const UpdateAsset = () => {
       <div className="flex flex-col mt-32" >
        <div className=''>
             <input type="text" name="asset_desc" placeholder='Asset Description' className='form-design mx-3' 
-            value={state.asset_desc}
+            value={assetDesc}
             onChange={handleInputChange}
             />
             <input type="text" name="asset_sn" placeholder='Asset SN #' className='form-design mx-3' 

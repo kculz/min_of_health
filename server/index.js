@@ -101,7 +101,7 @@ app.delete('/assets/delete/:id',(req,res)=>{
 
 //Edit asset by id
 
-app.put('/assets/edit',(req,res)=>{
+app.patch('/assets/edit',(req,res)=>{
     const {id} = req.params
     const assetDesc = req.body.assetDesc
     const assetSn = req.body.assetSn
